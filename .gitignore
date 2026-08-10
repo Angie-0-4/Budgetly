@@ -1,0 +1,10 @@
+# Node Dependencies
+**/node_modules/
+
+# Angular / Build Output
+**/dist/
+**/.angular/
+
+# OS Files
+.DS_Store
+Thumbs.db
