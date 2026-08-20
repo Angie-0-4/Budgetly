@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Transaction = require('../models/Trabsaction');
+const Transaction = require('../models/Transaction');
 
 //READ: Alle Einträge abrufen
 router.get('/', async (req, res) => {
