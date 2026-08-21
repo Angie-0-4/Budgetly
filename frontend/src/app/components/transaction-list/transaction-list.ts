@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import  { TransactionService, Transaction } from '../../services/transaction.service';
-import { errorContext } from 'rxjs/internal/util/errorContext';
 
 @Component({
   selector: 'app-transaction-list',
@@ -39,4 +38,19 @@ deleteTransaction(id: string | undefined): void {
     error: (err) => console.error('Fehler beim Löschen: ', err)
   });
 }
+  // berechnungen
+  get totalIncome(): number{
+    return this.transactions
+      .filter((t) => t.type === 'income')
+      .reduce((sum, t) => sum + Number(t.amount), 0);
+  }
+
+  get totalExpense(): number {
+    return this.transactions
+      .filter((t) => t.type === 'expense')
+      .reduce((sum, t) => sum + Number(t.amount),0);
+  }
+  get balance(): number {
+    return this.totalIncome - this.totalExpense;
+  }
 }

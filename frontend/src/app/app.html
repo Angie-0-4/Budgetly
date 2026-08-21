@@ -1,4 +1,5 @@
 <div class="container py-4">
   <h1 class="text-center mb-4">Budgetly</h1>
-  <app-transaction-list></app-transaction-list>
+  <app-transaction-form (transactionAdded)="list.loadTransactions()"></app-transaction-form>
+  <app-transaction-list #list></app-transaction-list>
 </div>

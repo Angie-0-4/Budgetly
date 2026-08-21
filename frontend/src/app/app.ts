@@ -11,4 +11,5 @@ import { TransactionForm } from './components/transaction-form/transaction-form'
 })
 export class App {
   title = 'Budgetly';
+
 }
