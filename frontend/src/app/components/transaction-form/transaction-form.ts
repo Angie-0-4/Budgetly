@@ -18,6 +18,7 @@ export class TransactionForm {
   amount: number | null = null;
   type: 'income' | 'expense' = 'expense';
   category: string = '';
+  date: string = new Date().toISOString().substring(0,10);
 
   constructor(private transactionService: TransactionService) {}
 
@@ -28,7 +29,8 @@ export class TransactionForm {
       title: this.title,
       amount: this.amount,
       type: this.type,
-      category: this.category
+      category: this.category,
+      date: this.date
     };
 
     this.transactionService.createTransaction(newTransaction).subscribe({
@@ -38,6 +40,7 @@ export class TransactionForm {
         this.amount = null;
         this.category = '';
         this.type = 'expense';
+        this.date = new Date().toISOString().substring(0,10);
         // benachrichtigung
         this.transactionAdded.emit();
       },
