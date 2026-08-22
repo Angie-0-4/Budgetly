@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import  { TransactionService, Transaction } from '../../services/transaction.service';
+
 
 @Component({
   selector: 'app-transaction-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './transaction-list.html',
   styleUrl: './transaction-list.css',
 })
 export class TransactionList implements OnInit{
 transactions: Transaction[] = [];
+selectedFilter: string = 'all';
+searchQuery: string ='';
 
 constructor(private transactionService: TransactionService) {}
 
@@ -38,6 +42,17 @@ deleteTransaction(id: string | undefined): void {
     error: (err) => console.error('Fehler beim Löschen: ', err)
   });
 }
+
+// Filter
+get filteredTransaction(): Transaction[]{
+  return this.transactions.filter((t) => {
+    const matchesType = this.selectedFilter === 'all' || t.type === this.selectedFilter;
+    const matchSearch = t.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      (t.category && t.category.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    return matchesType && matchSearch;
+  });
+}
+
   // berechnungen
   get totalIncome(): number{
     return this.transactions
