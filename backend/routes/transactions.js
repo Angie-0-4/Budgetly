@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Transaction = require('../models/transaction');
 
-// 1. READ: Alle Einträge abrufen
+// Alle Einträge abrufen
 router.get('/', async (req, res) => {
     try {
         const transactions = await Transaction.find().sort({ date: -1 });
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// 2. CREATE: Neuen Eintrag erstellen
+//  Neuen Eintrag erstellen
 router.post('/', async (req, res) => {
     try {
         const { title, amount, type, category } = req.body;
@@ -30,7 +30,26 @@ router.post('/', async (req, res) => {
     }
 });
 
-// 3. DELETE: Eintrag löschen
+// Einzrag Bearbeiten
+router.put('/:id', async (req, res) => {
+    try {
+      const updatedTransaction = await Transaction.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true, runValidators: true }
+      );
+  
+      if (!updatedTransaction) {
+        return res.status(404).json({ message: 'Eintrag nicht gefunden' });
+      }
+  
+      res.json(updatedTransaction);
+    } catch (err) {
+      res.status(400).json({ message: 'Fehler beim Aktualisieren', error: err.message });
+    }
+  });
+
+// Eintrag löschen
 router.delete('/:id', async (req, res) => {
     try {
         const transaction = await Transaction.findById(req.params.id);
