@@ -1,0 +1,54 @@
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
+
+const JWT_SECRET = 'budgetly_secret_key_123';
+
+// registrieren
+router.post('/register', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      return res.status(400).json({ message: 'Bitte Benutzername und Passwort angeben.' });
+    }
+
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Benutzername existiert bereits.' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ username, password: hashedPassword });
+    await user.save();
+
+    res.status(201).json({ message: 'Konto erfolgreich erstellt!' });
+  } catch (err) {
+    res.status(500).json({ message: 'Fehler bei der Registrierung.', error: err.message });
+  }
+});
+
+// anmelden
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({ message: 'Ungültige Anmeldedaten.' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Ungültige Anmeldedaten' });
+    }
+
+    const token = jwt.sign({ userId: user._id, username: user.username }, JWT_SECRET, { expiresIn: '2h' });
+
+    res.json({ message: 'Erfolgreich angemeldet!', token, username: user.username });
+  } catch (err) {
+    res.status(500).json({ message: 'Fehler beim Login', error: err.message });
+  }
+});
+
+module.exports = router;
