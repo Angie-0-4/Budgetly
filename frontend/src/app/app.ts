@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { TransactionList } from './components/transaction-list/transaction-list';
 import { TransactionForm } from './components/transaction-form/transaction-form';
@@ -8,24 +9,24 @@ import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TransactionList, TransactionForm, AuthComponent],
+  imports: [CommonModule, RouterOutlet, TransactionList, TransactionForm, AuthComponent
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit{
+export class App implements OnInit {
   title = 'Budgetly';
   currentUser: string | null = null;
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService) {}
 
-    ngOnInit(): void {
-      this.authService.currentUser$.subscribe((user) => {
-        this.currentUser = user;
-      });
-    }
-    
-    logout(): void {
-      this.authService.logout()
-    }
+  ngOnInit(): void {
+    this.authService.currentUser$.subscribe((user: string | null) => {
+      this.currentUser = user;
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
 }
-} 
