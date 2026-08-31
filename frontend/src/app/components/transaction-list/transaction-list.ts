@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import  { TransactionService, Transaction } from '../../services/transaction.service';
@@ -17,6 +17,11 @@ selectedFilter: string = 'all';
 searchQuery: string ='';
 
 constructor(private transactionService: TransactionService) {}
+@Output() editRequested = new EventEmitter<Transaction>();
+
+onEdit(transaction: Transaction): void {
+  this.editRequested.emit(transaction);
+}
 
 //automatischer aufruf
 ngOnInit(): void {
