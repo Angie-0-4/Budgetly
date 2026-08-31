@@ -74,11 +74,16 @@
             </span>
           </td>
           <td>{{ t.amount | number:'1.2-2' }} €</td>
-          <td>
+
+          <td class="text-end pe-4">
+            <button class="btn btn-outline-primary btn-sm me-2" (click)="onEdit(t)">
+              Bearbeiten
+            </button>
             <button class="btn btn-outline-danger btn-sm" (click)="deleteTransaction(t._id)">
               Löschen
             </button>
           </td>
+
         </tr>
         <tr *ngIf="filteredTransaction.length === 0">
           <td colspan="6" class="text-center py-4 text-muted">Keine passenden Einträge gefunden.</td>
