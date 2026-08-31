@@ -14,7 +14,15 @@
       </div>
     </div>
 
-    <app-transaction-form (transactionAdded)="list.loadTransactions()"></app-transaction-form>
-    <app-transaction-list #list></app-transaction-list>
+    <app-transaction-form
+    [editItem]="selectedTransaction" 
+    (transactionAdded)="list.loadTransactions()"
+    (cancelEdit)="selectedTransaction = $event">
+    </app-transaction-form>
+
+    <app-transaction-list 
+    #list
+    (editRequested)="selectedTransaction = $event">
+    </app-transaction-list>
   </div>
 </div>

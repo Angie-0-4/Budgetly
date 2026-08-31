@@ -16,6 +16,7 @@ import { AuthService } from './services/auth.service';
 export class App implements OnInit {
   title = 'Budgetly';
   currentUser: string | null = null;
+  selectedTransaction: any = null;
 
   constructor(public authService: AuthService) {}
 
