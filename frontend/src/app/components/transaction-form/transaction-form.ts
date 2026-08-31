@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, Output, OnChanges, SimpleChange, SimpleChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TransactionService, Transaction  } from '../../services/transaction.service';
@@ -10,8 +10,10 @@ import { TransactionService, Transaction  } from '../../services/transaction.ser
   templateUrl: './transaction-form.html',
   styleUrl: './transaction-form.css',
 })
-export class TransactionForm {
+export class TransactionForm implements OnChanges{
+  @Input() editItem: Transaction | null = null;
   @Output() transactionAdded = new EventEmitter<void>();
+  @Output() cancelEdit = new EventEmitter<void>();
 
   // Formular
   title: string = '';
@@ -21,6 +23,16 @@ export class TransactionForm {
   date: string = new Date().toISOString().substring(0,10);
 
   constructor(private transactionService: TransactionService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+      if (changes['editItem'] && this.editItem) {
+        this.title = this.editItem.title;
+        this.amount = this.editItem.amount;
+        this.type = this.editItem.type;
+        this.category = this.editItem.category || '';
+        this.date = this.editItem.date ? this.editItem.date.substring(0, 10) : new Date().toISOString().substring(0, 10);
+      }
+  }
 
   onSubmit(): void {
     if (!this.title || !this.amount) return;
@@ -33,18 +45,37 @@ export class TransactionForm {
       date: this.date
     };
 
-    this.transactionService.createTransaction(newTransaction).subscribe({
+    if (this.editItem && this.editItem._id) {
+      this.transactionService.updateTransaction(this.editItem._id, data).subscribe({
+        next: () => {
+          this.resetForm();
+          this.transactionSaved.emit();
+        },
+        error: (err) => console.error('Fehler beim Aktualisieren:', err)
+      });
+    } else {
+
+    this.transactionService.createTransaction(data).subscribe({
       next: () => {
-        // Formular zurücksetzen
-        this.title = '';
-        this.amount = null;
-        this.category = '';
-        this.type = 'expense';
-        this.date = new Date().toISOString().substring(0,10);
-        // benachrichtigung
-        this.transactionAdded.emit();
+        this.resetForm();
+        this.transactionSaved.emit();
       },
       error: (err) => console.error('Fehler beim Erstellen:', err)
     });
+  }
+}
+
+  onCancel(): void {
+    this.resetForm();
+    this.cancelEdit.emit();
+  }
+
+  resetForm(): void {
+    this.title = '';
+    this.amount = null;
+    this.category = '';
+    this.type = 'expense';
+    this.date = new Date().toISOString.substring(0, 10);
+    this,this.editItem = null;
   }
 }
