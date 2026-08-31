@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnChanges, SimpleChange, SimpleChanges} from '@angular/core';
+import { Component, EventEmitter,Input, Output, OnChanges, SimpleChange, SimpleChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TransactionService, Transaction  } from '../../services/transaction.service';
@@ -12,7 +12,7 @@ import { TransactionService, Transaction  } from '../../services/transaction.ser
 })
 export class TransactionForm implements OnChanges{
   @Input() editItem: Transaction | null = null;
-  @Output() transactionAdded = new EventEmitter<void>();
+  @Output() transactionSaved = new EventEmitter<void>();
   @Output() cancelEdit = new EventEmitter<void>();
 
   // Formular
@@ -37,7 +37,7 @@ export class TransactionForm implements OnChanges{
   onSubmit(): void {
     if (!this.title || !this.amount) return;
 
-    const newTransaction: Transaction = {
+    const data: Transaction = {
       title: this.title,
       amount: this.amount,
       type: this.type,
@@ -75,7 +75,7 @@ export class TransactionForm implements OnChanges{
     this.amount = null;
     this.category = '';
     this.type = 'expense';
-    this.date = new Date().toISOString.substring(0, 10);
-    this,this.editItem = null;
+    this.date = new Date().toISOString().substring(0, 10);
+    this.editItem = null;
   }
 }
