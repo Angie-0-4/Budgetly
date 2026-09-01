@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Transaction = require('../models/transaction');
+const Transaction = require('../models/Transaction');
 
 // Alle Einträge abrufen
 router.get('/', async (req, res) => {
     try {
-        const transactions = await Transaction.find().sort({ date: -1 });
+        const userId = req.headers['user-id'];
+        const transactions = await Transaction.find({ user: userId }).sort({ date: -1 });
         res.json(transactions);
     } catch (err) {
         res.status(500).json({ message: 'Serverfehler beim Abrufen der Daten' });
@@ -16,12 +17,14 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const { title, amount, type, category } = req.body;
+        const userId = req.headers['user-id'];
 
         const newTransaction = new Transaction({
             title,
             amount,
             type,
             category,
+            user: userId
         });
         const savedTransaction = await newTransaction.save();
         res.status(201).json(savedTransaction);
