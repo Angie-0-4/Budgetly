@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Routen
 app.use('/api/transactions', require('./routes/transactions'));
-app.use('api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 // Test Startseite
 app.get('/', (req, res) => {
   res.send('Budgetly Backend läuft!');
