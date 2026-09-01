@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const Transaction = require('../models/Transaction');
 
 const JWT_SECRET = 'budgetly_secret_key_123';
 
@@ -22,6 +23,23 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, password: hashedPassword });
     await user.save();
+
+    const sampleTransactions = [
+      {
+        title: 'Gehalt / Taschengeld',
+        amount: 850,
+        type: 'income',
+        category: 'Gehalt',
+        user: user._id
+      },
+      {
+        title: 'Supermarkt Einkauf',
+        amount: 45.50,
+        type: 'expense',
+        category: 'Lebensmittel',
+        user: user._id
+      }
+    ];
 
     res.status(201).json({ message: 'Konto erfolgreich erstellt!' });
   } catch (err) {
@@ -45,7 +63,7 @@ router.post('/login', async (req, res) => {
 
     const token = jwt.sign({ userId: user._id, username: user.username }, JWT_SECRET, { expiresIn: '2h' });
 
-    res.json({ message: 'Erfolgreich angemeldet!', token, username: user.username });
+    res.json({ message: 'Erfolgreich angemeldet!', token, userId: user._id, username: user.username });
   } catch (err) {
     res.status(500).json({ message: 'Fehler beim Login', error: err.message });
   }
