@@ -42,6 +42,7 @@ export class AuthComponent {
     } else {
       this.authService.register({ username: this.username, password: this.password }).subscribe({
         next: (res) => {
+          alert('Konto erfolgreich erstellt!');
           this.successMessage = res.message || 'Konto erstellt! Bitte einloggen.';
           this.isLoginMode = true;
           this.password = '';
