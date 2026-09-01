@@ -22,6 +22,9 @@ export class AuthService {
         if (res.token && res.username) {
           localStorage.setItem('budgetly_token', res.token);
           localStorage.setItem('budgetly_user', res.username);
+          if (res.userId) {
+            localStorage.setItem('budgetly_userId', res.userId);
+          }
           this.currentUserSubject.next(res.username);
         }
       })
@@ -31,6 +34,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('budgetly_token');
     localStorage.removeItem('budgetly_user');
+    localStorage.removeItem('budgetly_userId');
     this.currentUserSubject.next(null);
   }
 
@@ -40,5 +44,9 @@ export class AuthService {
 
   getUsername(): string | null {
     return localStorage.getItem('budgetly_user');
+  }
+
+  getUserId(): string | null {
+    return localStorage.getItem('budgetly_userId');
   }
 }

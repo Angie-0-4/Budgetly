@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Transaction {
@@ -19,23 +19,32 @@ export class TransactionService {
 
   constructor(private http: HttpClient) {}
 
+  private getHeaders(): { headers: HttpHeaders } {
+    const userId = localStorage.getItem('budgetly_userId') || '';
+    return {
+      headers: new HttpHeaders({
+        'user-id': userId
+      })
+    }
+  }
+
     //GET
     getTransactions(): Observable<Transaction[]> {
-      return this.http.get<Transaction[]>(this.apiUrL);
+      return this.http.get<Transaction[]>(this.apiUrL, this.getHeaders());
     }
 
     //POST
     createTransaction(transaction : Transaction): Observable<Transaction> {
-      return this.http.post<Transaction>(this.apiUrL, transaction);
+      return this.http.post<Transaction>(this.apiUrL, transaction, this.getHeaders());
     }
 
     //Update
     updateTransaction(id: string, transaction: Transaction): Observable<Transaction> {
-      return this.http.put<Transaction>(`${this.apiUrL}/${id}`, transaction);
+      return this.http.put<Transaction>(`${this.apiUrL}/${id}`, transaction, this.getHeaders());
     }
 
     //Delete
     deleteTransaction(id: string): Observable<{ message: string }> {
-      return this.http.delete<{ message: string }>(`${this.apiUrL}/${id}`);
+      return this.http.delete<{ message: string }>(`${this.apiUrL}/${id}`, this.getHeaders());
     }
 }
