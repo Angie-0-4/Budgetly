@@ -1,49 +1,35 @@
-
-<!-- Dashboard-->
-<div class="row g-3 mb-4">
-  <div class="col-md-4">
-    <div class="card bg-success text-white shadow-sm">
-      <div class="card-body">
-        <h6 class="card-title text-uppercase mb-1">Gesamteinnahmen</h6>
-        <h3 class="card-text mb-0">+{{ totalIncome | number:'1.2-2' }} €</h3>
-      </div>
-    </div>
+<!-- Dashboard Karten -->
+<div class="stats-grid">
+  <div class="stat-card stat-income">
+    <span class="stat-label">Gesamteinnahmen</span>
+    <span class="stat-amount">+{{ totalIncome | number:'1.2-2' }} €</span>
   </div>
 
-  <div class="col-md-4">
-    <div class="card bg-danger text-white shadow-sm">
-      <div class="card-body">
-        <h6 class="card-title text-uppercase mb-1">Gesamtausgaben</h6>
-        <h3 class="card-text mb-0">-{{ totalExpense | number:'1.2-2' }} €</h3>
-      </div>
-    </div>
+  <div class="stat-card stat-expense">
+    <span class="stat-label">Gesamtausgaben</span>
+    <span class="stat-amount">-{{ totalExpense | number:'1.2-2' }} €</span>
   </div>
 
-  <div class="col-md-4">
-    <div class="card text-white shadow-sm" [ngClass]="balance >= 0 ? 'bg-primary' : 'bg-warning text-dark'">
-      <div class="card-body">
-        <h6 class="card-title text-uppercase mb-1">Aktueller Kontostand</h6>
-        <h3 class="card-text mb-0">{{ balance | number:'1.2-2' }} €</h3>
-      </div>
-    </div>
+  <div class="stat-card" [class.stat-balance-positive]="balance >= 0" [class.stat-balance-negative]="balance < 0">
+    <span class="stat-label">Aktueller Kontostand</span>
+    <span class="stat-amount">{{ balance | number:'1.2-2' }} €</span>
   </div>
 </div>
 
-<!-- Transaktions Tabelle mit Filter -->
-<div class="card shadow-sm">
-  <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <h5 class="mb-0">Transaktionsübersicht</h5>
-    <div class="d-flex gap-2">
+<!-- Transaktions-Tabelle mit Filter -->
+<div class="table-card">
+  <div class="table-header">
+    <h3 class="table-title">Transaktionsübersicht</h3>
+    <div class="table-controls">
       <!-- Suchfeld -->
       <input
         type="text"
-        class="form-control form-control-sm"
+        class="control-input"
         placeholder="Suchen..."
         [(ngModel)]="searchQuery"
-        style="width: 160px;"
       />
       <!-- Typ-Filter -->
-      <select class="form-select form-select-sm" [(ngModel)]="selectedFilter" style="width: 140px;">
+      <select class="control-select" [(ngModel)]="selectedFilter">
         <option value="all">Alle Typen</option>
         <option value="income">Nur Einnahmen</option>
         <option value="expense">Nur Ausgaben</option>
@@ -51,8 +37,8 @@
     </div>
   </div>
 
-  <div class="card-body p-0">
-    <table class="table table-hover mb-0">
+  <div class="table-responsive">
+    <table class="data-table">
       <thead>
         <tr>
           <th>Datum</th>
@@ -60,33 +46,31 @@
           <th>Kategorie</th>
           <th>Typ</th>
           <th>Betrag</th>
-          <th>Aktion</th>
+          <th class="text-right">Aktion</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let t of filteredTransaction">
           <td>{{ t.date ? (t.date | date:'dd.MM.yyyy') : '-' }}</td>
-          <td class="fw-bold">{{ t.title }}</td>
+          <td class="font-bold">{{ t.title }}</td>
           <td>{{ t.category || '-' }}</td>
           <td>
-            <span class="badge" [ngClass]="t.type === 'income' ? 'bg-success' : 'bg-danger'">
+            <span class="badge" [class.badge-income]="t.type === 'income'" [class.badge-expense]="t.type === 'expense'">
               {{ t.type }}
             </span>
           </td>
           <td>{{ t.amount | number:'1.2-2' }} €</td>
-
-          <td class="text-end pe-4">
-            <button class="btn btn-outline-primary btn-sm me-2" (click)="onEdit(t)">
+          <td class="text-right action-cell">
+            <button class="btn-action btn-action-edit" (click)="onEdit(t)">
               Bearbeiten
             </button>
-            <button class="btn btn-outline-danger btn-sm" (click)="deleteTransaction(t._id)">
+            <button class="btn-action btn-action-delete" (click)="deleteTransaction(t._id)">
               Löschen
             </button>
           </td>
-
         </tr>
         <tr *ngIf="filteredTransaction.length === 0">
-          <td colspan="6" class="text-center py-4 text-muted">Keine passenden Einträge gefunden.</td>
+          <td colspan="6" class="empty-message">Keine passenden Einträge gefunden.</td>
         </tr>
       </tbody>
     </table>

@@ -1,0 +1,197 @@
+/* Dashboard Statistik-Karten */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .stat-card {
+    border-radius: 10px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+    margin-bottom: 0.35rem;
+  }
+  
+  .stat-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  /* Farbvarianten der Karten */
+  .stat-income {
+    background-color: #15803d; /* Grün */
+    color: #ffffff;
+  }
+  
+  .stat-expense {
+    background-color: #dc2626; /* Rot */
+    color: #ffffff;
+  }
+  
+  .stat-balance-positive {
+    background-color: #2563eb; /* Blau */
+    color: #ffffff;
+  }
+  
+  .stat-balance-negative {
+    background-color: #f59e0b; /* Orange/Gelb */
+    color: #1e293b;
+  }
+  
+  /* Tabellen-Container */
+  .table-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  
+  .table-header {
+    background-color: #1e293b;
+    color: #ffffff;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .table-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  
+  .table-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .control-input,
+  .control-select {
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+    border: 1px solid #475569;
+    background-color: #0f172a;
+    color: #ffffff;
+    font-size: 0.9rem;
+    outline: none;
+  }
+  
+  .control-input:focus,
+  .control-select:focus {
+    border-color: #3b82f6;
+  }
+  
+  /* Daten-Tabelle */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+  }
+  
+  .data-table th {
+    background-color: #f8fafc;
+    color: #64748b;
+    font-weight: 600;
+  }
+  
+  .data-table tr:hover {
+    background-color: #f8fafc;
+  }
+  
+  .font-bold {
+    font-weight: 600;
+    color: #1e293b;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .badge-income {
+    background-color: #dcfce7;
+    color: #15803d;
+  }
+  
+  .badge-expense {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  
+  /* Aktions-Buttons (Bearbeiten / Löschen) */
+  .action-cell {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  .btn-action {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.85rem;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-action-edit {
+    border: 1px solid #2563eb;
+    color: #2563eb;
+  }
+  
+  .btn-action-edit:hover {
+    background-color: #2563eb;
+    color: #ffffff;
+  }
+  
+  .btn-action-delete {
+    border: 1px solid #dc2626;
+    color: #dc2626;
+  }
+  
+  .btn-action-delete:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+  }
+  
+  .empty-message {
+    text-align: center;
+    padding: 2rem !important;
+    color: #94a3b8;
+  }
