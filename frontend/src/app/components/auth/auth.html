@@ -1,53 +1,75 @@
-<!-- Auth Container -->
-<div class="auth-wrapper">
-  <div class="auth-card">
-    <!-- Header -->
-    <div class="auth-header">
-      <h4 class="auth-title">{{ isLoginMode ? 'Budgetly Login' : 'Neues Konto erstellen' }}</h4>
-    </div>
-
-    <!-- Body & Formular -->
-    <div class="auth-body">
-      <!-- Statusmeldungen -->
-      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-      <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
-
-      <!-- Eingabe-Formular -->
-      <form (ngSubmit)="onSubmit()">
-        <!-- Benutzername -->
-        <div class="form-group">
-          <label class="form-label">Benutzername</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            [(ngModel)]="username" 
-            name="username" 
-            required>
+<!-- Auth Container (Zentriertes Bootstrap Grid) -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+      
+      <!-- Card Komponente -->
+      <div class="card shadow-sm border-0">
+        
+        <!-- Header -->
+        <div class="card-header bg-dark text-white text-center py-3">
+          <h4 class="mb-0 fw-bold">
+            {{ isLoginMode ? 'Budgetly Login' : 'Neues Konto erstellen' }}
+          </h4>
         </div>
 
-        <!-- Passwort -->
-        <div class="form-group">
-          <label class="form-label">Passwort</label>
-          <input 
-            type="password" 
-            class="form-control" 
-            [(ngModel)]="password" 
-            name="password" 
-            required>
+        <!-- Body & Formular -->
+        <div class="card-body p-4">
+          
+          <!-- Statusmeldungen -->
+          <div *ngIf="errorMessage" class="alert alert-danger py-2" role="alert">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="successMessage" class="alert alert-success py-2" role="alert">
+            {{ successMessage }}
+          </div>
+
+          <!-- Eingabe-Formular -->
+          <form (ngSubmit)="onSubmit()">
+            
+            <!-- Benutzername -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Benutzername</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Benutzername eingeben" 
+                [(ngModel)]="username" 
+                name="username" 
+                required>
+            </div>
+
+            <!-- Passwort -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Passwort</label>
+              <input 
+                type="password" 
+                class="form-control" 
+                placeholder="Passwort eingeben" 
+                [(ngModel)]="password" 
+                name="password" 
+                required>
+            </div>
+
+            <!-- Absende-Button -->
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+              {{ isLoginMode ? 'Anmelden' : 'Registrieren' }}
+            </button>
+          </form>
+
+          <!-- Umschalt-Button (Login / Registrieren) -->
+          <div class="text-center mt-3">
+            <button 
+              type="button" 
+              class="btn btn-link text-decoration-none" 
+              (click)="toggleMode()">
+              {{ isLoginMode ? 'Noch kein Konto? Hier registrieren' : 'Bereits ein Konto? Zum Login' }}
+            </button>
+          </div>
+
         </div>
-
-        <!-- Absende-Button -->
-        <button type="submit" class="btn-primary">
-          {{ isLoginMode ? 'Anmelden' : 'Registrieren' }}
-        </button>
-      </form>
-
-      <!-- Umschalt-Button (Login / Registrieren) -->
-      <div class="toggle-wrapper">
-        <button type="button" class="btn-toggle" (click)="toggleMode()">
-          {{ isLoginMode ? 'Noch kein Konto? Hier registrieren' : 'Bereits ein Konto? Zum Login' }}
-        </button>
       </div>
+
     </div>
   </div>
 </div>

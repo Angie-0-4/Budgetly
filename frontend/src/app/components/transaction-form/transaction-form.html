@@ -1,19 +1,27 @@
-<div class="form-card">
-  <div class="form-header" [class.is-editing]="editItem">
-    <h3 class="form-title">
+<!-- Formular-Karte -->
+<div class="card shadow-sm mb-4 border-0">
+  
+  <!-- Header (Farbe wechselt bei Bearbeitung) -->
+  <div 
+    class="card-header py-3" 
+    [ngClass]="editItem ? 'bg-warning text-dark' : 'bg-primary text-white'">
+    <h5 class="mb-0 fw-bold">
       {{ editItem ? "Transaktion bearbeiten" : "Neue Transaktion hinzufügen" }}
-    </h3>
+    </h5>
   </div>
 
-  <div class="form-body">
+  <!-- Formular-Body -->
+  <div class="card-body p-4">
     <form (ngSubmit)="onSubmit()">
-      <div class="form-grid">
+      <!-- Responsives Bootstrap Grid -->
+      <div class="row g-3">
+        
         <!-- Titel -->
-        <div class="form-field">
-          <label class="field-label">Titel</label>
+        <div class="col-12 col-md-4">
+          <label class="form-label fw-semibold">Titel</label>
           <input 
             type="text" 
-            class="field-input" 
+            class="form-control" 
             placeholder="z. B. Gehalt, Supermarkt" 
             [(ngModel)]="title" 
             name="title" 
@@ -21,12 +29,12 @@
         </div>
 
         <!-- Betrag -->
-        <div class="form-field">
-          <label class="field-label">Betrag (€)</label>
+        <div class="col-12 col-sm-6 col-md-2">
+          <label class="form-label fw-semibold">Betrag (€)</label>
           <input 
             type="number" 
             step="0.01" 
-            class="field-input" 
+            class="form-control" 
             placeholder="0.00" 
             [(ngModel)]="amount" 
             name="amount" 
@@ -34,50 +42,50 @@
         </div>
 
         <!-- Typ -->
-        <div class="form-field">
-          <label class="field-label">Typ</label>
-          <select class="field-select" [(ngModel)]="type" name="type">
+        <div class="col-12 col-sm-6 col-md-2">
+          <label class="form-label fw-semibold">Typ</label>
+          <select class="form-select" [(ngModel)]="type" name="type">
             <option value="expense">Ausgabe</option>
             <option value="income">Einnahme</option>
           </select>
         </div>
 
         <!-- Kategorie -->
-        <div class="form-field">
-          <label class="field-label">Kategorie</label>
+        <div class="col-12 col-sm-6 col-md-2">
+          <label class="form-label fw-semibold">Kategorie</label>
           <input 
             type="text" 
-            class="field-input" 
+            class="form-control" 
             placeholder="z. B. Essen, Miete" 
             [(ngModel)]="category" 
             name="category">
         </div>
 
-        <!-- Datum  -->
-        <div class="form-field">
-          <label class="field-label">Datum</label>
+        <!-- Datum -->
+        <div class="col-12 col-sm-6 col-md-2">
+          <label class="form-label fw-semibold">Datum</label>
           <input 
             type="date" 
-            class="field-input" 
+            class="form-control" 
             [(ngModel)]="date" 
             name="date">
         </div>
-      </div> 
 
-      <!-- Aktionen -->
-      <div class="form-actions">
+      </div>
+
+      <!-- Aktionen / Buttons -->
+      <div class="d-flex justify-content-end gap-2 mt-4">
         <button 
           *ngIf="editItem" 
           type="button" 
-          class="btn btn-cancel" 
+          class="btn btn-secondary px-4" 
           (click)="onCancel()">
           Abbrechen
         </button>
         <button 
           type="submit" 
-          class="btn" 
-          [class.btn-edit]="editItem" 
-          [class.btn-save]="!editItem">
+          class="btn px-4 fw-semibold" 
+          [ngClass]="editItem ? 'btn-warning' : 'btn-success'">
           {{ editItem ? 'Änderungen speichern' : 'Hinzufügen' }}
         </button>
       </div>
