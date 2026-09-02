@@ -7,7 +7,8 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-auth',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './auth.html'
+  templateUrl: './auth.html',
+  styleUrls: ['./auth.css']
 })
 export class AuthComponent {
   isLoginMode = true;

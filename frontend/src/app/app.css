@@ -1,0 +1,11 @@
+/* Eigene Anpassungen als Ergänzung zu Bootstrap */
+.app-title {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #0f172a;
+  }
+  
+  .btn-outline-danger {
+    font-weight: 600;
+    border-radius: 6px;
+  }

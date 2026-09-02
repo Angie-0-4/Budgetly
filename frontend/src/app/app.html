@@ -1,28 +1,38 @@
+<!-- Haupt-Container mit Bootstrap -->
 <div class="container py-4">
-  <!-- login -->
+
+  <!-- Ansicht: Nicht eingeloggt -->
   <div *ngIf="!currentUser">
     <app-auth></app-auth>
   </div>
 
-  <!-- eingeloggt-->
+  <!-- Ansicht: Eingeloggt -->
   <div *ngIf="currentUser">
-    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-      <h1 class="mb-0">Budgetly</h1>
-      <div>
-        <span class="me-3 text-muted">Eingeloggt als: <strong>{{ currentUser }}</strong></span>
-        <button class="btn btn-outline-danger btn-sm" (click)="logout()">Abmelden</button>
+    <!-- Header-Leiste mit Bootstrap-Flexbox & Border -->
+    <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom app-header">
+      <h1 class="h2 mb-0 app-title">Budgetly</h1>
+      
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-muted">
+          Willkommen, <strong class="text-dark">{{ currentUser }}</strong>
+        </span>
+        <button type="button" class="btn btn-outline-danger btn-sm" (click)="logout()">
+          Abmelden
+        </button>
       </div>
-    </div>
+    </header>
 
+    <!-- Transaktions-Komponenten -->
     <app-transaction-form
-    [editItem]="selectedTransaction" 
-    (transactionAdded)="list.loadTransactions()"
-    (cancelEdit)="selectedTransaction = $event">
+      [editItem]="selectedTransaction" 
+      (transactionAdded)="list.loadTransactions()"
+      (cancelEdit)="selectedTransaction = $event">
     </app-transaction-form>
 
     <app-transaction-list 
-    #list
-    (editRequested)="selectedTransaction = $event">
+      #list
+      (editRequested)="selectedTransaction = $event">
     </app-transaction-list>
   </div>
+
 </div>
