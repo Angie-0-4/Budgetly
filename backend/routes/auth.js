@@ -32,6 +32,13 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, password: hashedPassword });
     await user.save();
+    
+     // abfrage
+    if (!isPasswordValid(password)) {
+      return res.status(400).json({ 
+        message: 'Passwort muss 8–30 Zeichen lang sein und mind. einen Großbuchstaben, eine Zahl und ein Sonderzeichen enthalten.' 
+      });
+    }
 
     const sampleTransactions = [
       {
