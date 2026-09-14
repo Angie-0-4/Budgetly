@@ -4,8 +4,17 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Transaction = require('../models/Transaction');
-
 const JWT_SECRET = 'budgetly_secret_key_123';
+
+// Hilfefunktion
+function isPasswordValid(password) {
+  const isLengthOk = password.length >= 8 && password.length <= 30;
+  const hasUpperCase = password !== password.toLowerCase(); // Hat mind. einen Großbuchstaben
+  const hasNumber = /\d/.test(password);                   // Hat mind. eine Zahl
+  const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password); // Hat ein Sonderzeichen
+
+  return isLengthOk && hasUpperCase && hasNumber && hasSpecialChar;
+}
 
 // registrieren
 router.post('/register', async (req, res) => {
@@ -40,6 +49,8 @@ router.post('/register', async (req, res) => {
         user: user._id
       }
     ];
+
+    await Transaction.insertMany(sampleTransactions);
 
     res.status(201).json({ message: 'Konto erfolgreich erstellt!' });
   } catch (err) {
