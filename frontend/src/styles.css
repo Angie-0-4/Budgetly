@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+
+ body {
+    min-height: 100vh;
+    margin: 0;
+    background-color: #020211 !important;
+}
+
+
+.card {
+    background-color: #05162d !important;
+    border: 1px solid #626b7c !important;
+    color: #ffffff !important;
+}
+.card-header, thead.table-light th {
+    background-color: #1e2d44 !important;
+    border-color: #4f5153 !important;
+    color: #f0f4f8 !important;
+}
+.table {
+    color: #ffffff !important;
+    border-color: #4c5566 !important;
+    --bs-table-bg: transparent !important;
+}
+
+.form-control, .form-select {
+    background-color: #445c63 !important;
+    border: 1px solid #4a4e53 !important;
+    color: #ffffff !important;
+}
+
+.btn-primary {
+    background-color: #1e2d44 !important;
+    border-color: #707884 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+

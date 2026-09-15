@@ -1,19 +1,19 @@
 <!-- Dashboard Karten -->
 <div class="row g-3 mb-4">
   <div class="col-md-4">
-    <div class="card bg-success text-white shadow-sm h-100">
+    <div class="card bg-success text-greeb shadow-sm h-100">
       <div class="card-body">
         <h6 class="card-subtitle text-uppercase mb-2 opacity-75">Gesamteinnahmen</h6>
-        <h3 class="card-title mb-0 fw-bold">+{{ totalIncome | number:'1.2-2' }} €</h3>
+        <h3 class="card-title mb-0 fw-bold text-success">+{{ totalIncome | number:'1.2-2' }} €</h3>
       </div>
     </div>
   </div>
 
   <div class="col-md-4">
-    <div class="card bg-danger text-white shadow-sm h-100">
+    <div class="card shadow-sm h-100">
       <div class="card-body">
-        <h6 class="card-subtitle text-uppercase mb-2 opacity-75">Gesamtausgaben</h6>
-        <h3 class="card-title mb-0 fw-bold">-{{ totalExpense | number:'1.2-2' }} €</h3>
+        <h6 class="card-subtitle text-uppercase mb-2 text-muted">Gesamtausgaben</h6>
+        <h3 class="card-title mb-0 fw-bold text-danger" >-{{ totalExpense | number:'1.2-2' }} €</h3>
       </div>
     </div>
   </div>
