@@ -6,7 +6,7 @@ import { Observable, BehaviorSubject, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = 'https://budgetly-011m.onrender.com/api/auth';
   private currentUserSubject = new BehaviorSubject<string | null>(localStorage.getItem('budgetly_user'));
   public currentUser$ = this.currentUserSubject.asObservable();
 
