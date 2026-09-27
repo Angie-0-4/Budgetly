@@ -16,9 +16,16 @@ Die Anwendung ist vollständig in der Cloud bereitgestellt:
 
 ## Screenshots & Benutzeroberfläche
 
+## 1. Authentifizierung (Registrierung & Login)
+![Login Ansicht](screenshots/p1.png)
+![Login Ansicht](screenshots/p2.png)
 
+## 2. Hauptansicht (Formular und Transaktionsübersicht)
+![Dashboard Ansicht](screenshots/p3.png)
+![Dashboard Ansicht](screenshots/p5.png)
 
-
+## 3. Transaktion ändern
+![Dashboard Ansicht](screenshots/p6.png)
 ---
 
 ## Verwendete Technologien
