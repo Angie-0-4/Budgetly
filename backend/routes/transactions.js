@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 //  Neuen Eintrag erstellen
 router.post('/', async (req, res) => {
     try {
-        const { title, amount, type, category } = req.body;
+        const { title, amount, type, category, date } = req.body;
         const userId = req.headers['user-id'];
 
         const newTransaction = new Transaction({
@@ -24,6 +24,7 @@ router.post('/', async (req, res) => {
             amount,
             type,
             category,
+            date: date || DataTransfer.now(),
             user: userId
         });
         const savedTransaction = await newTransaction.save();
