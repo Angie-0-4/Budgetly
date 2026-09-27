@@ -25,8 +25,8 @@
     <!-- Transaktions-Komponenten -->
     <app-transaction-form
       [editItem]="selectedTransaction" 
-      (transactionAdded)="list.loadTransactions()"
-      (cancelEdit)="selectedTransaction = $event">
+      (transactionSaved)="list.loadTransactions()"
+      (cancelEdit)="selectedTransaction = null">
     </app-transaction-form>
 
     <app-transaction-list 
