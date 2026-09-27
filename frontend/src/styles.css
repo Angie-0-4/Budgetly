@@ -1,8 +1,8 @@
 
- body {
+ html, body {
     min-height: 100vh;
     margin: 0;
-    background-color: #020211 !important;
+    background-color: #f6f6ff !important;
 }
 
 
