@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
             amount,
             type,
             category,
-            date: date || DataTransfer.now(),
+            date: date || Data.now(),
             user: userId
         });
         const savedTransaction = await newTransaction.save();
