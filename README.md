@@ -71,5 +71,7 @@ Die Anwendung ist vollständig in der Cloud bereitgestellt:
 * [Angular CLI](https://angular.dev/) (`npm install -g @angular/cli`)
 * [Git](https://git-scm.com/)
 
+## KI 
+* Gemini: Geholfen beim Debbuging, Readme.md und Backend
 ---
 
