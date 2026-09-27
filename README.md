@@ -65,7 +65,6 @@ Die Anwendung ist vollständig in der Cloud bereitgestellt:
 
 ## Lokale Installation & Ausführung
 * Repository klonen:
-```bash
 git clone [https://github.com/Angie-0-4/Budgetly.git](https://github.com/Angie-0-4/Budgetly.git)
 cd Budgetly
 
