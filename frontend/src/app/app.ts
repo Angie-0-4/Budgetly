@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransactionList } from './components/transaction-list/transaction-list';
 import { TransactionForm } from './components/transaction-form/transaction-form';
