@@ -17,7 +17,7 @@ Die Anwendung ist vollständig in der Cloud bereitgestellt:
 ## Screenshots & Benutzeroberfläche
 
 ## 1. Authentifizierung (Registrierung & Login)
-![Login Ansicht](screenshots/p1.png)
+![Registrier Ansicht](screenshots/p1.png)
 ![Login Ansicht](screenshots/p2.png)
 
 ## 2. Hauptansicht (Formular und Transaktionsübersicht)
@@ -61,10 +61,23 @@ Die Anwendung ist vollständig in der Cloud bereitgestellt:
 ### 3. Interaktive Auswertung & Filter
 * Dynamische Berechnung von **Gesamteinnahmen**, **Gesamtausgaben** und dem **aktuellen Kontostand (Saldo)** in Echtzeit.
 * Live-Filterung nach Typ (`Einnahme`, `Ausgabe`, `Alle`) und eine Textsuche nach Titel oder Kategorie.
-
 ---
 
 ## Lokale Installation & Ausführung
+* Repository klonen:
+```bash
+git clone [https://github.com/Angie-0-4/Budgetly.git](https://github.com/Angie-0-4/Budgetly.git)
+cd Budgetly
+
+* Backend starten:
+cd backend
+npm install
+npm run dev
+
+* Frontend starten:
+cd ../frontend
+npm install
+ng serve
 
 ### Voraussetzungen
 * [Node.js](https://nodejs.org/) (Version 18 oder höher)
