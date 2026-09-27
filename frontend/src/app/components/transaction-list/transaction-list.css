@@ -1,3 +1,10 @@
+ 
+ ::ng-deep table.table tbody td,
+    ::ng-deep table.table tbody tr {
+      color: #ffffff !important;
+      --bs-table-color: #ffffff !important;
+    }
+
 .search-filter-input {
     width: 160px;
   }
@@ -12,9 +19,5 @@
       width: 100%;
     }
 
-    ::ng-deep table.table tbody td,
-    ::ng-deep table.table tbody tr {
-      color: #ffffff !important;
-      --bs-table-color: #ffffff !important;
-    }
+   
   }
