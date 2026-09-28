@@ -1,6 +1,6 @@
-# Budgetly – Persönlicher Finanz- & Ausgaben-Tracker
+# Budgetly – Persönlicher Finanz & Ausgaben Tracker
 
-Budgetly ist eine moderne Fullstack Webanwendung zur Erfassung, Verwaltung und Auswertung persönlicher Einnahmen und Ausgaben. Die Anwendung ermöglicht eine rollen und nutzerbasierte Datentrennung mit vollständiger CRUD-Funktionalität, interaktiven Auswertungen und einem responsiven Design.
+Budgetly ist eine moderne Fullstack Webanwendung zur Erfassung, Verwaltung und Auswertung persönlicher Einnahmen und Ausgaben. Die Anwendung ermöglicht eine rollen und nutzerbasierte Datentrennung mit vollständiger CRUD Funktionalität, interaktiven Auswertungen und einem responsiven Design.
 
 ---
 
@@ -69,13 +69,13 @@ git clone [https://github.com/Angie-0-4/Budgetly.git](https://github.com/Angie-0
 cd Budgetly
 
 * Backend starten:
-cd backend
-npm install
+cd backend,
+npm install,
 npm run dev
 
 * Frontend starten:
-cd ../frontend
-npm install
+cd ../frontend,
+npm install,
 ng serve
 
 ### Voraussetzungen
